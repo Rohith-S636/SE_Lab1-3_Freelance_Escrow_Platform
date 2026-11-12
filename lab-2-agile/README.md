@@ -35,7 +35,3 @@ All three sprints were closed during the compressed Jira exercise on 12 November
 ## Interpretation
 
 This is an academic Jira workflow simulation, not a software delivery report. The Done statuses do not prove that the platform features were implemented, tested, or deployed.
-
-## Lab handout limitation
-
-The official Lab 2 handout was not supplied. The work follows the lab title and the peer example's visible Jira activities (project/dashboard, Epic, stories, priorities, and story points), with sprint simulation and traceability added as supporting material. Confirm instructor-specific requirements before final submission.
