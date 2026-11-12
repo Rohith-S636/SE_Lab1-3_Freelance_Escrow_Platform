@@ -4,11 +4,10 @@
 
 This repository contains the academic analysis and design deliverables for a freelance platform in which creators and sponsors agree milestone terms, review protected draft deliverables, and release escrowed payments only after sponsor approval.
 
-> **Academic scope:** These are Software Engineering coursework deliverables. Jira sprint statuses document a classroom workflow simulation; they are not evidence that the platform has been implemented, tested, or deployed.
+> **Academic scope:** Jira sprint statuses document a classroom workflow simulation. They are not evidence that the platform has been implemented, tested, or deployed.
 
-## Project scenario
+## Problem scope
 
-The platform supports:
 - Joint definition of milestone deliverables, due dates, and escrow amounts.
 - Creator draft submission and automatic watermarking before sponsor preview.
 - Sponsor approval or rejection with written revision comments.
@@ -28,9 +27,7 @@ The platform supports:
 | NFR-001 | Watermark image/video previews within five seconds under a defined test workload. |
 | NFR-002 | Encrypt escrow wallet data and maintain append-only lock/release/refund events with timestamp, actor ID, milestone ID, and transaction reference. |
 
-## Lab deliverables
-
-### Lab 1 — Requirements Engineering & UML Use-Case Modelling
+## Lab 1 — Requirements Engineering & UML Use-Case Modelling
 
 - [Original Problem Statement #53](problem-statement/53_SE_Lab1_SE_Problem_Statements.pdf)
 - [Requirements Table](requirements/Requirements_Table.pdf)
@@ -39,40 +36,37 @@ The platform supports:
 
 Use cases: UC-01 Define Milestone Contract; UC-02 Submit Draft Deliverable; UC-03 Apply Watermark; UC-04 Review & Approve Draft; UC-05 Request Revision; UC-06 Release Milestone Payment; UC-07 Process Payment Transaction; UC-08 Raise Dispute.
 
-### Lab 2 — Jira Hands-on: Agile Backlog Creation & Sprint Simulation
+## Lab 2 — Agile Backlog Creation & Sprint Simulation
 
-See [Lab 2 README](lab-2-agile/README.md), the backlog CSV, simulation report, and evidence folder.
+- [Lab 2 folder](lab-2-agile/)
+- [Lab 2 report source](lab-2-agile/Lab2_Agile_Backlog_and_Sprint_Simulation.md)
+- [Jira backlog CSV](lab-2-agile/Lab2_Jira_Backlog_Import.csv)
+- [Evidence capture notes](lab-2-agile/evidence/README.md)
 
-[Jira project backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Sprint board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34)
+[Jira backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Sprint board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34)
 
-The recorded academic simulation covers 9 stories and 57 story points across three closed sprints: Sprint 1 (18), Sprint 2 (23), Sprint 3 (16). Sprint 2 and Sprint 3 reports identify their stories as completed outside the sprint because the simulation completion timestamps precede their planned start dates. This reporting discrepancy is disclosed in the Lab 2 notes.
+The recorded simulation covers 9 stories and 57 story points across three closed sprints: Sprint 1 (18), Sprint 2 (23), Sprint 3 (16). Sprint 2 and Sprint 3 reports identify their stories as completed outside the sprint because the completion timestamps precede their planned start dates. This discrepancy is disclosed in the Lab 2 report.
 
-**Lab 2 handout limitation:** The official Lab 2 handout was not available when this work was prepared. The deliverable follows the lab title and the supplied peer example's visible Jira activities; confirm any additional instructor-specific criteria.
+**Handout limitation:** The official Lab 2 handout was not available when this work was prepared. The deliverable follows the lab title and the supplied peer example's visible Jira activities; confirm any additional instructor-specific criteria.
 
-### Lab 3 — Software Architecture & UML Component Modelling
+## Lab 3 — Software Architecture & UML Component Modelling
 
-See [Lab 3 README](lab-3-architecture/README.md).
+- [Lab 3 folder](lab-3-architecture/)
+- [Architecture justification source](lab-3-architecture/Lab3_Architecture_Justification.md)
+- [Editable component diagram source](lab-3-architecture/source/Lab3_Component_Diagram_Source.dot)
 
-The selected style is **Layered Architecture with modular business components**, after comparing Layered, Microservices, and Client-Server architectures. The component diagram is a logical component view; components are not claimed to be separately deployed services.
+The selected style is **Layered Architecture with modular business components**, after comparing Layered, Microservices, and Client-Server architectures. Components are logical modules, not separately deployed services.
 
-## Repository structure
+## Submission status
 
-```
-problem-statement/       Original Problem Statement #53
-requirements/            Lab 1 requirements baseline
-diagrams/                Lab 1 use-case diagram
-use-case-flow/           Lab 1 use-case flow
-lab-2-agile/             Jira backlog, sprint simulation, evidence
-lab-3-architecture/      Architecture justification and component diagram
-```
+The Lab 1 PDFs already present in this repository are retained. Lab 2 and Lab 3 Markdown sources, the backlog CSV, and editable DOT source have been added. The Lab 2 report PDF and both Lab 3 PDFs still need to be committed as binary files. Genuine Jira screenshots also need to be captured and added; no synthetic screenshots are used.
 
-## Traceability and submission notes
+## Traceability and limitations
 
 - Labs 2 and 3 retain the Lab 1 requirement identifiers FR-001–FR-005 and NFR-001–NFR-002.
 - Story-point values are planning estimates, not measured implementation effort.
-- Jira issue status is workflow evidence only; do not interpret it as feature-completion evidence.
-- The five-second watermark target needs a defined asset size, hardware, concurrency, and timing method before it can be treated as a reproducible performance test.
-- Capture genuine Jira UI screenshots for the evidence folder; do not substitute recreated diagrams or mock screenshots for Jira evidence.
+- Jira issue status is workflow evidence only; it does not establish feature implementation.
+- The five-second watermark target needs a defined asset size, hardware, concurrency, and timing method before it can be treated as a reproducible performance result.
 
 ## License
 
