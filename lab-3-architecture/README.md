@@ -2,19 +2,20 @@
 
 **Scenario:** Freelance Content Creator Escrow Platform (Problem Statement #53)
 
+## Deliverables and sources
+
+- [Architecture justification (Markdown source)](Lab3_Architecture_Justification.md)
+- [Editable Graphviz DOT component diagram source](source/Lab3_Component_Diagram_Source.dot)
+
+The previously prepared component-diagram PDF and one-page justification PDF are available as local submission assets but their binary files have not yet been committed to this repository. Export the updated justification source to PDF and add both PDFs before final submission.
+
 ## Architecture selection
 
-**Selected style: Layered Architecture with modular business components.**
+**Layered Architecture with modular business components.**
 
-The submission compares all three styles named in the Lab 3 handout:
+The justification explicitly compares Layered, Microservices, and Client-Server architectures and selects Layered for the current academic-scale scope and tightly coordinated escrow workflow.
 
-- **Layered:** separates presentation, business rules, and data/integration concerns. It supports clear responsibility boundaries and straightforward transaction coordination; cross-layer calls can add overhead.
-- **Microservices:** enables independent deployment and scaling, but introduces operational complexity, network latency, and distributed consistency concerns that are disproportionate to this academic-scale workflow.
-- **Client-Server:** centralizes logic and data and is simple to reason about, but can create a server bottleneck and concentrates availability risk.
-
-Layered Architecture is selected because the milestone contract, review, approval, escrow, and dispute workflows are closely coordinated and benefit from clear separation without requiring independently deployed services.
-
-## Components represented
+## Components
 
 1. User Interface
 2. Application/API Facade
@@ -27,20 +28,15 @@ Layered Architecture is selected because the milestone contract, review, approva
 9. Append-only Audit Log
 10. External Payment Gateway
 
-The diagram maps components to the Lab 1 requirement baseline. It is a logical component view within the selected layered architecture; it does not imply that each component is a separately deployed microservice.
+The components are logical modules within one layered architecture, not separately deployed microservices.
 
-## Deliverables
-
-- [UML Component Diagram (PDF)](Lab3_UML_Component_Diagram.pdf)
-- [One-page Architecture Justification (PDF)](Lab3_Architecture_Justification_One_Page.pdf)
-- [Editable Graphviz DOT source](source/Lab3_Component_Diagram_Source.dot)
-
-## Handout alignment checklist
+## Handout alignment
 
 - [x] Compare Layered, Microservices, and Client-Server.
-- [x] Select and justify one of the required architecture styles.
-- [x] Include at least five components.
-- [x] Identify provided and required interface concepts in the diagram legend.
-- [x] Provide a one-page architecture justification.
+- [x] Select and justify one of the required styles.
+- [x] Model at least five components.
+- [x] Describe provided and required interface notation.
+- [ ] Confirm that at least four UML provided/required interfaces are clearly drawn and connected in the exported PDF.
+- [ ] Add the component diagram PDF and one-page justification PDF to this repository.
 
-**Final visual check:** Before submission, inspect the PDF at normal zoom and confirm the UML provided-interface (lollipop) and required-interface (socket) notation is unambiguous and attached to the relevant component interfaces. If the instructor expects exact port-level ball/socket connectors, refine the diagram in a UML-capable editor before submitting.
+Before submission, inspect the diagram at normal zoom. If exact UML lollipop/socket notation on component ports is expected, refine the diagram in a UML-capable editor.
