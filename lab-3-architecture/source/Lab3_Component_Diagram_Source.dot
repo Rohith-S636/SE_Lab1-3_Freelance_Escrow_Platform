@@ -1,0 +1,39 @@
+digraph EscrowPlatform {
+  rankdir=TB;
+  graph [fontname="Arial", labelloc=t, label="Freelance Content Creator Escrow Platform – Layered Component View"];
+  node [shape=component, style=filled, fillcolor="#F8FBFF", color="#35546F", fontname="Arial"];
+
+  subgraph cluster_presentation {
+    label="Presentation Layer";
+    UI [label="User Interface\nCreator | Sponsor | Moderator"];
+    API [label="Application/API Facade\nAuthentication | request routing"];
+  }
+
+  subgraph cluster_business {
+    label="Application / Business Layer";
+    Contract [label="Milestone Contract\nFR-002"];
+    Delivery [label="Deliverable & Watermark\nFR-003 | NFR-001"];
+    Review [label="Review & Revision\nFR-001 | FR-004"];
+    Escrow [label="Escrow & Payment\nFR-001"];
+    Dispute [label="Dispute Resolution\nFR-005"];
+  }
+
+  subgraph cluster_data {
+    label="Data & External Integration Layer";
+    Store [label="Platform Data Store"];
+    Audit [label="Append-only Audit Log\nNFR-002"];
+    Gateway [label="External Payment Gateway"];
+  }
+
+  UI -> API [label="HTTPS / UI API"];
+  API -> Contract [label="Contract API"];
+  API -> Delivery [label="Upload / preview API"];
+  API -> Review [label="Review API"];
+  API -> Escrow [label="Escrow API"];
+  Review -> Dispute [label="Dispute after two rejections"];
+  Contract -> Store;
+  Delivery -> Store;
+  Review -> Audit;
+  Escrow -> Audit;
+  Escrow -> Gateway;
+}
