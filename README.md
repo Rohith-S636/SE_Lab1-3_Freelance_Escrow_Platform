@@ -2,20 +2,18 @@
 
 **Software Engineering Labs 1–3 | Problem Statement #53**
 
-This repository contains the academic analysis and design deliverables for a freelance platform in which creators and sponsors agree milestone terms, review protected draft deliverables, and release escrowed payments only after sponsor approval.
+This repository contains requirements analysis, Agile workflow simulation, and architecture design for a freelance platform in which creators and sponsors agree milestone terms, review protected drafts, and release escrowed payments only after sponsor approval.
 
-> **Academic scope:** Jira sprint statuses document a classroom workflow simulation. They are not evidence that the platform has been implemented, tested, or deployed.
+> **Academic scope:** Jira statuses document a classroom workflow simulation. They are not evidence that the platform has been implemented, tested, or deployed.
 
-## Problem scope
+## Problem scope and requirements baseline
 
-- Joint definition of milestone deliverables, due dates, and escrow amounts.
-- Creator draft submission and automatic watermarking before sponsor preview.
-- Sponsor approval or rejection with written revision comments.
-- Payment release only after sponsor approval/sign-off.
-- Dispute escalation after two rejections to a neutral Escrow Moderator.
-- Encrypted escrow wallet data and append-only financial audit events.
-
-## Requirements baseline
+- Jointly define milestone deliverables, due dates, and escrow amounts.
+- Submit creator drafts and automatically watermark image/video previews before sponsor access.
+- Record sponsor approval or rejection with written revision comments.
+- Release milestone payment only after sponsor approval/sign-off.
+- After two rejections, allow either party to raise a dispute; freeze escrow and route it to a neutral Escrow Moderator.
+- Encrypt escrow wallet data and maintain append-only financial audit events.
 
 | ID | Requirement |
 |---|---|
@@ -23,7 +21,7 @@ This repository contains the academic analysis and design deliverables for a fre
 | FR-002 | Creator and sponsor jointly define deliverable description, due date, and escrow amount. |
 | FR-003 | Automatically watermark every uploaded image/video draft before sponsor review. |
 | FR-004 | Sponsor rejection requires written comments; milestone becomes Pending Revision, funds remain locked, and creator is notified. |
-| FR-005 | Either party may raise a dispute after two rejections; freeze funds and route to neutral moderator for recorded resolution. |
+| FR-005 | Either party may raise a dispute after two rejections; freeze funds and route to a neutral moderator for recorded resolution. |
 | NFR-001 | Watermark image/video previews within five seconds under a defined test workload. |
 | NFR-002 | Encrypt escrow wallet data and maintain append-only lock/release/refund events with timestamp, actor ID, milestone ID, and transaction reference. |
 
@@ -38,35 +36,39 @@ Use cases: UC-01 Define Milestone Contract; UC-02 Submit Draft Deliverable; UC-0
 
 ## Lab 2 — Agile Backlog Creation & Sprint Simulation
 
-- [Lab 2 folder](lab-2-agile/)
-- [Lab 2 report source](lab-2-agile/Lab2_Agile_Backlog_and_Sprint_Simulation.md)
+- [Lab 2 report (Markdown source)](lab-2-agile/Lab2_Agile_Backlog_and_Sprint_Simulation.md)
+- [Lab 2 report (PDF)](lab-2-agile/Lab2_Agile_Backlog_and_Sprint_Simulation.pdf)
 - [Jira backlog CSV](lab-2-agile/Lab2_Jira_Backlog_Import.csv)
-- [Evidence capture notes](lab-2-agile/evidence/README.md)
+- [Evidence capture instructions](lab-2-agile/evidence/README.md)
+- [Jira backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Sprint board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34)
 
-[Jira backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Sprint board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34)
+The simulation contains 9 stories and 57 story points across three closed sprints: Sprint 1 (18), Sprint 2 (23), Sprint 3 (16). Sprint 2 and Sprint 3 reports classify their stories as completed outside the sprint because completion timestamps precede their planned start dates. This discrepancy is disclosed rather than hidden.
 
-The recorded simulation covers 9 stories and 57 story points across three closed sprints: Sprint 1 (18), Sprint 2 (23), Sprint 3 (16). Sprint 2 and Sprint 3 reports identify their stories as completed outside the sprint because the completion timestamps precede their planned start dates. This discrepancy is disclosed in the Lab 2 report.
+## Lab 3 — Architecture Selection & UML Component Modelling
 
-**Handout limitation:** The official Lab 2 handout was not available when this work was prepared. The deliverable follows the lab title and the supplied peer example's visible Jira activities; confirm any additional instructor-specific criteria.
+- [Lab 3 overview](lab-3-architecture/README.md)
+- [Architecture justification (source)](lab-3-architecture/Lab3_Architecture_Justification.md)
+- [Architecture justification (one-page PDF)](lab-3-architecture/Lab3_Architecture_Justification_One_Page.pdf)
+- [UML component diagram (PDF)](lab-3-architecture/Lab3_UML_Component_Diagram.pdf)
+- [Editable Graphviz source](lab-3-architecture/Lab3_Component_Diagram_Source.dot)
 
-## Lab 3 — Software Architecture & UML Component Modelling
+**Selected architecture:** Layered Architecture with modular business components, chosen after comparing Layered, Microservices, and Client-Server architectures. Components are logical modules, not separately deployed microservices.
 
-- [Lab 3 folder](lab-3-architecture/)
-- [Architecture justification source](lab-3-architecture/Lab3_Architecture_Justification.md)
-- [Editable component diagram source](lab-3-architecture/source/Lab3_Component_Diagram_Source.dot)
+## Final submission checklist
 
-The selected style is **Layered Architecture with modular business components**, after comparing Layered, Microservices, and Client-Server architectures. Components are logical modules, not separately deployed services.
+- [x] Lab 1 source PDFs present.
+- [x] Lab 2 Jira backlog and sprint simulation report source present.
+- [x] Lab 3 architecture justification and editable diagram source present.
+- [ ] Regenerate and visually inspect the Lab 2 and Lab 3 PDFs from the latest sources.
+- [ ] Add five genuine Jira screenshots listed in the evidence README.
+- [ ] Confirm instructor-specific criteria against the official Lab 2 handout (not supplied during preparation).
 
-## Submission status
+## Important limitations
 
-The Lab 1 PDFs already present in this repository are retained. Lab 2 and Lab 3 Markdown sources, the backlog CSV, and editable DOT source have been added. The Lab 2 report PDF and both Lab 3 PDFs still need to be committed as binary files. Genuine Jira screenshots also need to be captured and added; no synthetic screenshots are used.
-
-## Traceability and limitations
-
-- Labs 2 and 3 retain the Lab 1 requirement identifiers FR-001–FR-005 and NFR-001–NFR-002.
-- Story-point values are planning estimates, not measured implementation effort.
-- Jira issue status is workflow evidence only; it does not establish feature implementation.
-- The five-second watermark target needs a defined asset size, hardware, concurrency, and timing method before it can be treated as a reproducible performance result.
+- Jira Done statuses are workflow-simulation evidence only; they do not prove feature implementation, testing, or deployment.
+- The 57 story points are planning estimates, not measured effort or velocity.
+- NFR-001 is a target, not a verified performance result. Validation requires defined asset sizes, hardware, concurrency, and timing method.
+- The official Lab 2 handout was not available during preparation. Check for any additional instructor-specific criteria.
 
 ## License
 
