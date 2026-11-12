@@ -2,7 +2,7 @@
 
 **Project:** Freelance Content Creator Escrow Platform  
 **Problem statement:** #53  
-**Jira project:** FEP — [Backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34)
+**Jira project:** FEP —[Backlog](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/backlog) · [Board](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34) · [Completed Sprint Report](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/reports/sprint-retrospective?sprint=106) · [Epic Report](https://vario-pes.atlassian.net/jira/software/c/projects/FEP/boards/34/reports/epic-report) 
 
 ## Objective
 
