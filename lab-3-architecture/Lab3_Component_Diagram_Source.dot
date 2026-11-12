@@ -1,39 +1,42 @@
 digraph EscrowPlatform {
-  rankdir=TB;
-  graph [fontname="Arial", labelloc=t, label="Freelance Content Creator Escrow Platform – Layered Component View"];
-  node [shape=component, style=filled, fillcolor="#F8FBFF", color="#35546F", fontname="Arial"];
-
-  subgraph cluster_presentation {
-    label="Presentation Layer";
-    UI [label="User Interface\nCreator | Sponsor | Moderator"];
-    API [label="Application/API Facade\nAuthentication | request routing"];
-  }
-
-  subgraph cluster_business {
-    label="Application / Business Layer";
-    Contract [label="Milestone Contract\nFR-002"];
-    Delivery [label="Deliverable & Watermark\nFR-003 | NFR-001"];
-    Review [label="Review & Revision\nFR-001 | FR-004"];
-    Escrow [label="Escrow & Payment\nFR-001"];
-    Dispute [label="Dispute Resolution\nFR-005"];
-  }
-
-  subgraph cluster_data {
-    label="Data & External Integration Layer";
-    Store [label="Platform Data Store"];
-    Audit [label="Append-only Audit Log\nNFR-002"];
-    Gateway [label="External Payment Gateway"];
-  }
-
-  UI -> API [label="HTTPS / UI API"];
-  API -> Contract [label="Contract API"];
-  API -> Delivery [label="Upload / preview API"];
-  API -> Review [label="Review API"];
-  API -> Escrow [label="Escrow API"];
-  Review -> Dispute [label="Dispute after two rejections"];
-  Contract -> Store;
-  Delivery -> Store;
-  Review -> Audit;
-  Escrow -> Audit;
-  Escrow -> Gateway;
+ graph [rankdir=LR,splines=ortho,nodesep=0.42,ranksep=0.72,pad=0.25,fontname="Arial",fontsize=18,labelloc=t,label="Freelance Content Creator Escrow Platform\nUML Component View — Layered Architecture"];
+ node [fontname="Arial",fontsize=10,color="#35546F",fontcolor="#183247"];
+ edge [fontname="Arial",fontsize=8,color="#526777",arrowsize=0.65];
+ subgraph cluster_presentation { label="Presentation Layer"; style="rounded"; color="#9AB6CC";
+  UI [shape=component,style=filled,fillcolor="#EAF3FA",label="User Interface\nCreator | Sponsor | Moderator"];
+  API [shape=component,style=filled,fillcolor="#EAF3FA",label="Application / API Facade\nAuthentication | Request routing"]; }
+ subgraph cluster_business { label="Application / Business Layer"; style="rounded"; color="#9AB6CC";
+  Contract [shape=component,style=filled,fillcolor="#F3F7E8",label="Milestone Contract\nFR-002"];
+  Delivery [shape=component,style=filled,fillcolor="#F3F7E8",label="Deliverable & Watermark\nFR-003 | NFR-001"];
+  Review [shape=component,style=filled,fillcolor="#F3F7E8",label="Review & Revision\nFR-001 | FR-004"];
+  Escrow [shape=component,style=filled,fillcolor="#F3F7E8",label="Escrow & Payment\nFR-001 | NFR-002"];
+  Dispute [shape=component,style=filled,fillcolor="#F3F7E8",label="Dispute Resolution\nFR-005"]; }
+ subgraph cluster_data { label="Data & External Integration Layer"; style="rounded"; color="#9AB6CC";
+  Store [shape=component,style=filled,fillcolor="#FCEFE6",label="Platform Data Store"];
+  Audit [shape=component,style=filled,fillcolor="#FCEFE6",label="Append-only Audit Log\nNFR-002"];
+  Gateway [shape=component,style=filled,fillcolor="#FCEFE6",label="External Payment Gateway"]; }
+ // Provided interface = lollipop circle; required interface = socket half-circle.
+ node [shape=circle,fixedsize=true,width=0.20,height=0.20,label="",style=filled,fillcolor="#FFFFFF",color="#1F6B8F"];
+ IAppP; IContractP; IWatermarkP; IReviewP; IEscrowP; IPaymentP; IAuditP;
+ node [shape=plaintext,fixedsize=false,width=0,height=0,label="",style=solid,fontname="Arial",fontsize=13,fontcolor="#1F6B8F"];
+ IAppR [label="◖",xlabel="IApplicationAPI"];
+ IContractR [label="◖",xlabel="IMilestoneContract"];
+ IWatermarkR [label="◖",xlabel="IWatermarkProcessing"];
+ IReviewR [label="◖",xlabel="IReviewWorkflow"];
+ IEscrowR [label="◖",xlabel="IEscrowOperations"];
+ IPaymentR [label="◖",xlabel="IPaymentGateway"];
+ IAuditR [label="◖",xlabel="IAuditEvents"];
+ UI -> IAppP [arrowhead=none,color="#1F6B8F"]; IAppR -> API [arrowhead=none,color="#1F6B8F"]; IAppP -> IAppR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Contract -> IContractP [arrowhead=none,color="#1F6B8F"]; IContractR -> API [arrowhead=none,color="#1F6B8F"]; IContractP -> IContractR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Delivery -> IWatermarkP [arrowhead=none,color="#1F6B8F"]; IWatermarkR -> API [arrowhead=none,color="#1F6B8F"]; IWatermarkP -> IWatermarkR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Review -> IReviewP [arrowhead=none,color="#1F6B8F"]; IReviewR -> API [arrowhead=none,color="#1F6B8F"]; IReviewP -> IReviewR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Escrow -> IEscrowP [arrowhead=none,color="#1F6B8F"]; IEscrowR -> API [arrowhead=none,color="#1F6B8F"]; IEscrowP -> IEscrowR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Gateway -> IPaymentP [arrowhead=none,color="#1F6B8F"]; IPaymentR -> Escrow [arrowhead=none,color="#1F6B8F"]; IPaymentP -> IPaymentR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false];
+ Audit -> IAuditP [arrowhead=none,color="#1F6B8F"]; IAuditR -> Escrow [arrowhead=none,color="#1F6B8F"]; IAuditP -> IAuditR [style=dashed,arrowhead=none,color="#1F6B8F",constraint=false]; Review -> IAuditR [style=dotted,arrowhead=none,color="#738A99",constraint=false];
+ Contract -> Store [style=dotted,arrowhead=none,label="persist"]; Delivery -> Store [style=dotted,arrowhead=none,label="metadata"]; Review -> Dispute [style=dotted,arrowhead=vee,label="after 2 rejections"]; Escrow -> Store [style=dotted,arrowhead=none,label="transaction state"];
+ subgraph cluster_legend { label="UML Interface Legend"; style="rounded,dashed"; color="#B7C7D1";
+  Ball [shape=circle,fixedsize=true,width=0.20,height=0.20,label="",color="#1F6B8F"];
+  Socket [shape=plaintext,label="◖",fontcolor="#1F6B8F"];
+  Legend [shape=plaintext,label="Lollipop / ball = provided interface     Socket = required interface\nDashed connector pairs the named provider and consumer interface."];
+  Ball -> Legend [arrowhead=none,color="#1F6B8F"]; Socket -> Legend [arrowhead=none,color="#1F6B8F"]; }
 }
