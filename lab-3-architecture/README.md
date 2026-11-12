@@ -1,42 +1,43 @@
-# Lab 3 — Software Architecture & UML Component Modelling
+# Lab 3 — Architecture Selection and Justification
 
-**Scenario:** Freelance Content Creator Escrow Platform (Problem Statement #53)
+**System:** Freelance Content Creator Escrow Platform  
+**Problem statement:** #53
 
-## Deliverables and sources
-
-- [Architecture justification (Markdown source)](Lab3_Architecture_Justification.md)
-- [Editable Graphviz DOT component diagram source](source/Lab3_Component_Diagram_Source.dot)
-
-The previously prepared component-diagram PDF and one-page justification PDF are available as local submission assets but their binary files have not yet been committed to this repository. Export the updated justification source to PDF and add both PDFs before final submission.
-
-## Architecture selection
+## Selected architecture
 
 **Layered Architecture with modular business components.**
 
-The justification explicitly compares Layered, Microservices, and Client-Server architectures and selects Layered for the current academic-scale scope and tightly coordinated escrow workflow.
+The platform coordinates milestone definition, creator draft submission, watermarking, sponsor review, payment release, and dispute handling. These activities share business state and require controlled transaction boundaries. A layered design provides clear responsibility separation without the operational cost of independently deploying and coordinating many services.
 
-## Components
+## Comparison of required architectural styles
 
-1. User Interface
-2. Application/API Facade
-3. Milestone Contract
-4. Deliverable & Watermark
-5. Review & Revision
-6. Escrow & Payment
-7. Dispute Resolution
-8. Platform Data Store
-9. Append-only Audit Log
-10. External Payment Gateway
+| Style | Advantages | Limitations for this system |
+|---|---|---|
+| Layered | Separates presentation, business rules, and persistence/integration; supports maintainability, testability, and transaction coordination. | Cross-layer calls can add overhead; independent scaling is less granular. |
+| Microservices | Independent deployment and scaling of contract, watermark, review, payment, and dispute capabilities. | Adds service discovery, network latency, distributed transactions/consistency, observability, and deployment overhead. |
+| Client-Server | Centralizes business logic and data; straightforward interaction model and access control. | Central server can become a bottleneck and availability concentration point; internal responsibilities can become tightly coupled without additional modular structure. |
 
-The components are logical modules within one layered architecture, not separately deployed microservices.
+For the current academic-scale scope, Layered Architecture offers the best balance of clarity, coordinated escrow transactions, maintainability, and implementation simplicity.
 
-## Handout alignment
+## Two primary reasons
 
-- [x] Compare Layered, Microservices, and Client-Server.
-- [x] Select and justify one of the required styles.
-- [x] Model at least five components.
-- [x] Describe provided and required interface notation.
-- [ ] Confirm that at least four UML provided/required interfaces are clearly drawn and connected in the exported PDF.
-- [ ] Add the component diagram PDF and one-page justification PDF to this repository.
+1. **Workflow cohesion:** Contract definition, review, approval, payment release, and dispute resolution are tightly related steps. Separating presentation, application/business logic, and data/integration responsibilities makes the workflow easier to reason about and test.
+2. **Proportionate complexity:** The platform does not currently require independent deployment of each business capability. Modular components within layers preserve separation of concerns without introducing microservice orchestration and distributed consistency problems.
 
-Before submission, inspect the diagram at normal zoom. If exact UML lollipop/socket notation on component ports is expected, refine the diagram in a UML-capable editor.
+## Security advantage
+
+The application/business layer mediates escrow operations. The user interface cannot directly change wallet balances. The escrow capability checks sponsor approval before release, freezes funds when a qualifying dispute is raised after two rejections, and records lock/release/refund events in an append-only audit log. Escrow wallet data is encrypted, aligning with NFR-002.
+
+## Performance benefit
+
+Watermark processing is isolated as a business capability. Its image/video preview path can be optimized and measured against NFR-001's five-second target without changing contract, review, or payment logic. A valid performance claim still requires a defined workload, hardware, concurrency, and timing method.
+
+## Component view
+
+The accompanying component model identifies the User Interface, Application/API Facade, Milestone Contract, Deliverable & Watermark, Review & Revision, Escrow & Payment, Dispute Resolution, Platform Data Store, Append-only Audit Log, and External Payment Gateway.
+
+These are logical components within one layered architecture. They are **not** asserted to be separately deployed microservices.
+
+## UML interface notation check
+
+The diagram legend identifies provided interfaces (lollipop/ball) and required interfaces (socket). Before final submission, inspect the exported diagram at normal zoom and ensure at least four interfaces are visibly connected to the appropriate component boundaries. If the instructor expects exact UML port-level ball/socket notation, refine the diagram in a UML-capable editor before submission.
